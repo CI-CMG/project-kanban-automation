@@ -47,4 +47,20 @@ jobs:
               }
             }
           }' -f organization=$ORGANIZATION -F number=$PROJECT_NUMBER > project_data.json
-          cat project_data.json
+          
+          end_cursor=$(jq -r '.data.organization.projectV2.items.pageInfo.endCursor' project.json)
+          has_next_page=$(jq -r '.data.organization.projectV2.items.pageInfo.hasNextPage' project.json)
+          
+          jq -r '.data.organization.projectV2.items.nodes[] | select(.content.parent != null and .isArchived == false and (.status.name == "In review" or .status.name == "In progress" or .status.name == "Blocked") )' project.json | jq -s > with_parents.json
+          
+          with_parents_count=$(jq -r '. | length' with_parents.json)
+          for (( i=0; i<$with_parents_count; i++ ))
+          do
+            repository=$(jq -r ".[$i].content.repository.name" with_parents.json)
+            child=$(jq -r ".[$i].content.number" with_parents.json)
+            parent=$(jq -r ".[$i].content.parent.number" with_parents.json)
+            parent_status=$(jq -r ".data.organization.projectV2.items.nodes[] | select(.content.repository.name == \"$repository\" and .content.number == $parent) | .status.name" project.json)
+            if [[ "$parent_status" =~ ^(Backlog|Ready|Done)$ ]]; then
+              echo "need to trigger update for issue $repository/$parent with status $parent_status"
+            fi
+          done
