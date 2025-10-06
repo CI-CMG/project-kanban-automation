@@ -1,8 +1,9 @@
 name: project-automation
 
 on:
-  schedule:
-    - cron: "* * * * *"
+  workflow_dispatch:
+#  schedule:
+#    - cron: "* * * * *"
 jobs:
   debug:
     runs-on: ubuntu-latest
