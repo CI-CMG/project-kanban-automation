@@ -20,7 +20,7 @@ jobs:
           ORGANIZATION: CI-CMG
           PROJECT_NUMBER: 17
         run: |
-          gh api graphql -f query='query($organization: String! $number: Int!) {
+          gh api graphql -f query='query($organization: String!) {
             organization(login: $organization) {
               projectsV2 {
                 nodes {
@@ -30,5 +30,5 @@ jobs:
                 }
               }
             }
-          }' -f organization=$ORGANIZATION -F number=$PROJECT_NUMBER > project_data.json
+          }' -f organization=$ORGANIZATION > project_data.json
           cat project_data.json
