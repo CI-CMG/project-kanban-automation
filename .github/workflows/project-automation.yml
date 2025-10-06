@@ -29,5 +29,6 @@ jobs:
                   title
                 }
               }
+            }
           }' -f organization=$ORGANIZATION -F number=$PROJECT_NUMBER > project_data.json
           cat project_data.json
