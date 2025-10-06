@@ -46,7 +46,7 @@ jobs:
                 }
               }
             }
-          }' -f organization=$ORGANIZATION -F number=$PROJECT_NUMBER > project_data.json
+          }' -f organization=$ORGANIZATION -F number=$PROJECT_NUMBER > project.json
           
           end_cursor=$(jq -r '.data.organization.projectV2.items.pageInfo.endCursor' project.json)
           has_next_page=$(jq -r '.data.organization.projectV2.items.pageInfo.hasNextPage' project.json)
