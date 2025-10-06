@@ -20,15 +20,31 @@ jobs:
           ORGANIZATION: CI-CMG
           PROJECT_NUMBER: 17
         run: |
-          gh api graphql -f query='query($organization: String!) {
+          gh api graphql -f query='query($organization: String! $number: Int!) {
             organization(login: $organization) {
-              projectsV2(first:100) {
-                nodes {
-                  id
-                  number
-                  title
+              projectV2(number: $number) {
+                items(first: 100, after: null) {
+                  pageInfo { endCursor startCursor hasNextPage hasPreviousPage }
+                  nodes { 
+                    ... on ProjectV2Item { id isArchived type
+                      status: fieldValueByName(name: "Status") {
+                        ... on ProjectV2ItemFieldSingleSelectValue { name }
+                      }
+                      content {
+                        ... on Issue { id state title number
+                          issueType {
+                            name
+                          }
+                          parent { id title number state
+                            issueType { name }
+                          }
+                          repository { id name }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
-          }' -f organization=$ORGANIZATION > project_data.json
+          }' -f organization=$ORGANIZATION -F number=$PROJECT_NUMBER > project_data.json
           cat project_data.json
