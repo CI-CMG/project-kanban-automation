@@ -6,6 +6,7 @@ on:
 
 jobs:
   schedule:
+    runs-on: ubuntu-latest
     steps:
       - name: Run Automation
         uses: ./.github/workflows/run-all.yaml

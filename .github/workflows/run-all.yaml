@@ -11,6 +11,7 @@ on:
 
 jobs:
   run-all:
+    runs-on: ubuntu-latest
     steps:
       - name: parent-issue-to-in-progress
         uses: ./.github/workflows/parent-issue-to-in-progress.yaml
