@@ -73,7 +73,7 @@ jobs:
           no_start_count=$(jq -r '. | length' no_start.json)
           for (( i=0; i<$no_start_count; i++ ))
           do
-            repository=$(jq -r ".[$i].content.repository.name" with_parents.json)
+            repository=$(jq -r ".[$i].content.repository.name" no_start.json)
             issue_number=$(jq -r ".[$i].content.number" no_start.json)
             item_id=$(jq -r ".[$i].id" no_start.json)
             echo "setting start date $repository/$issue_id"
