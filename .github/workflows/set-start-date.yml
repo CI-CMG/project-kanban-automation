@@ -77,7 +77,7 @@ jobs:
             issue_number=$(jq -r ".[$i].content.number" no_start.json)
             item_id=$(jq -r ".[$i].id" no_start.json)
             echo "setting start date $repository/$issue_number"
-            gh api graphql -f query='mutation($project_id: ID! $item_id: ID! $field_id: ID! start_date: Date!) {
+            gh api graphql -f query='mutation($project_id: ID! $item_id: ID! $field_id: ID! $start_date: Date!) {
               set_start_date: updateProjectV2ItemFieldValue(input: { 
                   projectId: $project_id 
                   itemId: $item_id 
