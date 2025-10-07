@@ -65,7 +65,7 @@ jobs:
           end_cursor=$(jq -r '.data.organization.projectV2.items.pageInfo.endCursor' project.json)
           has_next_page=$(jq -r '.data.organization.projectV2.items.pageInfo.hasNextPage' project.json)
           project_id=$(jq -r '.data.organization.projectV2.id' project.json)
-          start_date_field_id=$(jq -r '.data.organization.projectV2.fields.nodes[] | select(.name == "Start date") | .id' project.json)
+          field_id=$(jq -r '.data.organization.projectV2.fields.nodes[] | select(.name == "Start date") | .id' project.json)
           start_date=$(date +"%Y-%m-%d")
           
           jq -r '.data.organization.projectV2.items.nodes[] | select(.startDate == null and .isArchived == false and (.status.name == "In review" or .status.name == "In progress" or .status.name == "Blocked" or .status.name == "Done") )' project.json | jq -s > no_start.json
@@ -76,7 +76,7 @@ jobs:
             repository=$(jq -r ".[$i].content.repository.name" no_start.json)
             issue_number=$(jq -r ".[$i].content.number" no_start.json)
             item_id=$(jq -r ".[$i].id" no_start.json)
-            echo "setting start date $repository/$issue_id"
+            echo "setting start date $repository/$issue_number"
             gh api graphql -f query='mutation($project_id: ID! $item_id: ID! $field_id: ID! start_date: Date!) {
               set_start_date: updateProjectV2ItemFieldValue(input: { 
                   projectId: $project_id 
