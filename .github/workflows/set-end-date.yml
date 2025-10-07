@@ -44,7 +44,7 @@ jobs:
                       startDate: fieldValueByName(name: "Start date") {
                              ... on ProjectV2ItemFieldDateValue { date }
                       }
-                      startDate: fieldValueByName(name: "End date") {
+                      endDate: fieldValueByName(name: "End date") {
                              ... on ProjectV2ItemFieldDateValue { date }
                       }
                       content {
