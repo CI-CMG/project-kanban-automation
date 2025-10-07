@@ -1,11 +1,11 @@
-name: project-automation
+name: set start date
 
 on:
   workflow_dispatch:
 #  schedule:
 #    - cron: "* * * * *"
 jobs:
-  debug:
+  graphql:
     runs-on: ubuntu-latest
     steps:
       - name: Generate token
@@ -31,6 +31,7 @@ jobs:
                       name
                       options { id name }
                     }
+                    ... on ProjectV2Field { id name }
                   }
                 }
                 items(first: 100, after: null) {
@@ -40,8 +41,11 @@ jobs:
                       status: fieldValueByName(name: "Status") {
                         ... on ProjectV2ItemFieldSingleSelectValue { name }
                       }
+                      startDate: fieldValueByName(name: "Start date") {
+                             ... on ProjectV2ItemFieldDateValue { date }
+                      }
                       content {
-                        ... on Issue { id state title number
+                        ... on Issue { id state title number 
                           issueType {
                             name
                           }
@@ -61,25 +65,27 @@ jobs:
           end_cursor=$(jq -r '.data.organization.projectV2.items.pageInfo.endCursor' project.json)
           has_next_page=$(jq -r '.data.organization.projectV2.items.pageInfo.hasNextPage' project.json)
           project_id=$(jq -r '.data.organization.projectV2.id' project.json)
-          status_field_id=$(jq -r '.data.organization.projectV2.fields.nodes[] | select(.name == "Status") | .id' project.json)
-          in_progress_value_id=$(jq -r '.data.organization.projectV2.fields.nodes[] | select(.name == "Status") | .options[] | select(.name == "In progress") | .id' project.json)
+          start_date_field_id=$(jq -r '.data.organization.projectV2.fields.nodes[] | select(.name == "Start date") | .id' project.json)
+          start_date=$(date +"%Y-%m-%d")
           
-          jq -r '.data.organization.projectV2.items.nodes[] | select(.content.parent != null and .isArchived == false and (.status.name == "In review" or .status.name == "In progress" or .status.name == "Blocked") )' project.json | jq -s > with_parents.json
+          jq -r '.data.organization.projectV2.items.nodes[] | select(.startDate == null and .isArchived == false and (.status.name == "In review" or .status.name == "In progress" or .status.name == "Blocked" or .status.name == "Done") )' project.json | jq -s > no_start.json
           
-          with_parents_count=$(jq -r '. | length' with_parents.json)
-          for (( i=0; i<$with_parents_count; i++ ))
+          no_start_count=$(jq -r '. | length' no_start.json)
+          for (( i=0; i<$no_start_count; i++ ))
           do
             repository=$(jq -r ".[$i].content.repository.name" with_parents.json)
-            child=$(jq -r ".[$i].content.number" with_parents.json)
-            parent=$(jq -r ".[$i].content.parent.number" with_parents.json)
-            parent_id=$(jq -r ".data.organization.projectV2.items.nodes[] | select(.content.repository.name == \"$repository\" and .content.number == $parent) | .id" project.json)
-            parent_status=$(jq -r ".data.organization.projectV2.items.nodes[] | select(.content.repository.name == \"$repository\" and .content.number == $parent) | .status.name" project.json)
-            if [[ "$parent_status" =~ ^(Backlog|Ready|Done)$ ]]; then
-              echo "update issue $repository/$parent with status $parent_status"
-              gh api graphql -f query='mutation($project: ID! $item: ID! $status_field: ID! $status_value: String!) {
-                set_status: updateProjectV2ItemFieldValue(input: { projectId: $project itemId: $item fieldId: $status_field value: { singleSelectOptionId: $status_value } }) {
-                  projectV2Item { id }
+            issue_number=$(jq -r ".[$i].content.number" no_start.json)
+            item_id=$(jq -r ".[$i].id" no_start.json)
+            echo "setting start date $repository/$issue_id"
+            gh api graphql -f query='mutation($project_id: ID! $item_id: ID! $field_id: ID! start_date: Date!) {
+              set_start_date: updateProjectV2ItemFieldValue(input: { 
+                  projectId: $project_id 
+                  itemId: $item_id 
+                  field_id: $field_id 
+                  value: { date: $start_date } 
                 }
-              }' -f project=$project_id -f item=$parent_id -f status_field=$status_field_id -f status_value=$in_progress_value_id
-            fi
+              ) {
+                projectV2Item { id }
+              }
+            }' -f project_id=$project_id -f item_id=$item_id -f field_id=$field_id -f start_date=$start_date
           done
