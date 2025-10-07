@@ -1,4 +1,4 @@
-name: set start date
+name: set end date
 
 on:
   workflow_dispatch:
@@ -44,6 +44,9 @@ jobs:
                       startDate: fieldValueByName(name: "Start date") {
                              ... on ProjectV2ItemFieldDateValue { date }
                       }
+                      startDate: fieldValueByName(name: "End date") {
+                             ... on ProjectV2ItemFieldDateValue { date }
+                      }
                       content {
                         ... on Issue { id state title number 
                           issueType {
@@ -65,19 +68,19 @@ jobs:
           end_cursor=$(jq -r '.data.organization.projectV2.items.pageInfo.endCursor' project.json)
           has_next_page=$(jq -r '.data.organization.projectV2.items.pageInfo.hasNextPage' project.json)
           project_id=$(jq -r '.data.organization.projectV2.id' project.json)
-          field_id=$(jq -r '.data.organization.projectV2.fields.nodes[] | select(.name == "Start date") | .id' project.json)
-          start_date=$(date +"%Y-%m-%d")
+          field_id=$(jq -r '.data.organization.projectV2.fields.nodes[] | select(.name == "End date") | .id' project.json)
+          end_date=$(date +"%Y-%m-%d")
           
-          jq -r '.data.organization.projectV2.items.nodes[] | select(.startDate == null and .isArchived == false and (.status.name == "In review" or .status.name == "In progress" or .status.name == "Blocked" or .status.name == "Done") )' project.json | jq -s > no_start.json
+          jq -r '.data.organization.projectV2.items.nodes[] | select(.endDate == null and .isArchived == false and .status.name == "Done" )' project.json | jq -s > no_end.json
           
-          no_start_count=$(jq -r '. | length' no_start.json)
-          for (( i=0; i<$no_start_count; i++ ))
+          count=$(jq -r '. | length' no_end.json)
+          for (( i=0; i<$count; i++ ))
           do
-            item_id=$(jq -r ".[$i].id" no_start.json)
-            echo "setting start date $item_id"
-            gh api graphql -f query='mutation($project_id: ID! $item_id: ID! $field_id: ID! $start_date: Date!) {
-              set_start_date: updateProjectV2ItemFieldValue(input: {  projectId: $project_id  itemId: $item_id fieldId: $field_id  value: { date: $start_date } }) {
+            item_id=$(jq -r ".[$i].id" no_end.json)
+            echo "setting end date $item_id"
+            gh api graphql -f query='mutation($project_id: ID! $item_id: ID! $field_id: ID! $end_date: Date!) {
+              set_end_date: updateProjectV2ItemFieldValue(input: {  projectId: $project_id  itemId: $item_id fieldId: $field_id  value: { date: $end_date } }) {
                 projectV2Item { id }
               }
-            }' -f project_id=$project_id -f item_id=$item_id -f field_id=$field_id -f start_date=$start_date
+            }' -f project_id=$project_id -f item_id=$item_id -f field_id=$field_id -f end_date=$end_date
           done
