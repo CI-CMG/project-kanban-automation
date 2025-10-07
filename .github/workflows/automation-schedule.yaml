@@ -1,4 +1,4 @@
-name: set parent issues to in progress
+name: automated schedule
 
 on:
   schedule:
