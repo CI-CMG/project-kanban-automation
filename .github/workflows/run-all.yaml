@@ -13,6 +13,7 @@ jobs:
   run-all:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: parent-issue-to-in-progress
         uses: ./.github/workflows/parent-issue-to-in-progress.yaml
         with:
