@@ -2,10 +2,11 @@ name: set parent issues to in progress
 
 on:
   workflow_dispatch:
-    project-numbers:
-      description: 'Project Numbers'
-      required: true
-      type: string
+    inputs:
+      project-numbers:
+        description: 'Project Numbers'
+        required: true
+        type: string
 #  schedule:
 #    - cron: "* * * * *"
 jobs:
