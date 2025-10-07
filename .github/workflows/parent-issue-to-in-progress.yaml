@@ -1,14 +1,13 @@
 name: set parent issues to in progress
 
 on:
+  workflow_call:
   workflow_dispatch:
     inputs:
       project-numbers:
         description: 'Project Numbers'
         required: true
         type: string
-#  schedule:
-#    - cron: "* * * * *"
 jobs:
   graphql:
     runs-on: ubuntu-latest
@@ -19,7 +18,7 @@ jobs:
         with:
           app-id: ${{ vars.PROJECT_AUTOMATION_APP_ID }}
           private-key: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
-      - name: Get project data
+      - name: Run Update
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
           ORGANIZATION: CI-CMG

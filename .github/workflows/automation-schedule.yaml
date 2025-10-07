@@ -1,0 +1,13 @@
+name: set parent issues to in progress
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  schedule:
+    steps:
+      - name: Run Automation
+        uses: ./.github/workflows/run-all.yaml
+        with:
+          project-numbers: '17'

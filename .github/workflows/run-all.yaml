@@ -1,0 +1,26 @@
+name: set parent issues to in progress
+
+on:
+  workflow_call:
+  workflow_dispatch:
+    inputs:
+      project-numbers:
+        description: 'Project Numbers'
+        required: true
+        type: string
+
+jobs:
+  run-all:
+    steps:
+      - name: parent-issue-to-in-progress
+        uses: ./.github/workflows/parent-issue-to-in-progress.yaml
+        with:
+          project-numbers: ${{ github.event.inputs.project-numbers }}
+      - name: set-start-date
+        uses: ./.github/workflows/set-start-date.yaml
+        with:
+          project-numbers: ${{ github.event.inputs.project-numbers }}
+      - name: set-end-date
+        uses: ./.github/workflows/set-end-date.yaml
+        with:
+          project-numbers: ${{ github.event.inputs.project-numbers }}
