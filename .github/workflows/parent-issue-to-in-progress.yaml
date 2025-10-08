@@ -2,6 +2,9 @@ name: set parent issues to in progress
 
 on:
   workflow_call:
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM:
+        required: true
     inputs:
       project-numbers:
         description: 'Project Numbers'

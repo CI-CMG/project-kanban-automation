@@ -2,6 +2,9 @@ name: run all automation
 
 on:
   workflow_call:
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM:
+        required: true
     inputs:
       project-numbers:
         description: 'Project Numbers'
@@ -19,11 +22,17 @@ jobs:
     uses: ./.github/workflows/parent-issue-to-in-progress.yaml
     with:
       project-numbers: ${{ github.event.inputs.project-numbers }}
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
   set-start-date:
     uses: ./.github/workflows/set-start-date.yaml
     with:
       project-numbers: ${{ github.event.inputs.project-numbers }}
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
   set-end-date:
     uses: ./.github/workflows/set-end-date.yaml
     with:
       project-numbers: ${{ github.event.inputs.project-numbers }}
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}

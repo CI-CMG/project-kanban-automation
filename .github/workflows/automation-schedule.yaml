@@ -10,3 +10,5 @@ jobs:
     uses: ./.github/workflows/run-all.yaml
     with:
       project-numbers: '17'
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
