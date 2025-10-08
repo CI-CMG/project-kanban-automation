@@ -2,6 +2,11 @@ name: run all automation
 
 on:
   workflow_call:
+    inputs:
+      project-numbers:
+        description: 'Project Numbers'
+        required: true
+        type: string
   workflow_dispatch:
     inputs:
       project-numbers:
@@ -10,19 +15,15 @@ on:
         type: string
 
 jobs:
-  run-all:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: parent-issue-to-in-progress
-        uses: ./.github/workflows/parent-issue-to-in-progress.yaml
-        with:
-          project-numbers: ${{ github.event.inputs.project-numbers }}
-      - name: set-start-date
-        uses: ./.github/workflows/set-start-date.yaml
-        with:
-          project-numbers: ${{ github.event.inputs.project-numbers }}
-      - name: set-end-date
-        uses: ./.github/workflows/set-end-date.yaml
-        with:
-          project-numbers: ${{ github.event.inputs.project-numbers }}
+  parent-issue-to-in-progress:
+    uses: ./.github/workflows/parent-issue-to-in-progress.yaml
+    with:
+      project-numbers: ${{ github.event.inputs.project-numbers }}
+  set-start-date:
+    uses: ./.github/workflows/set-start-date.yaml
+    with:
+      project-numbers: ${{ github.event.inputs.project-numbers }}
+  set-end-date:
+    uses: ./.github/workflows/set-end-date.yaml
+    with:
+      project-numbers: ${{ github.event.inputs.project-numbers }}

@@ -7,10 +7,6 @@ on:
 
 jobs:
   schedule:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run Automation
-        uses: ./.github/workflows/run-all.yaml
-        with:
-          project-numbers: '17'
+    uses: ./.github/workflows/run-all.yaml
+    with:
+      project-numbers: '17'
