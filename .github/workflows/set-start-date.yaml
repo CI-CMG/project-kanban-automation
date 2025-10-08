@@ -17,6 +17,7 @@ jobs:
   graphql:
     runs-on: ubuntu-latest
     steps:
+      - run: echo ${{ vars.PROJECT_AUTOMATION_APP_ID }}
       - name: Generate token
         id: generate-token
         uses: actions/create-github-app-token@v2
