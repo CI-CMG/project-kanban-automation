@@ -93,6 +93,8 @@ jobs:
             start_date=$(date +"%Y-%m-%d")
             
             jq -r '.data.organization.projectV2.items.nodes[] | select(.startDate == null and .isArchived == false and (.status.name == "In review" or .status.name == "In progress" or .status.name == "Blocked" or .status.name == "Done") )' project.json | jq -s > no_start.json
+
+            cat no_start.json
             
             no_start_count=$(jq -r '. | length' no_start.json)
             for (( i=0; i<$no_start_count; i++ ))
