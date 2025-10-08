@@ -18,6 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo ${{ vars.PROJECT_AUTOMATION_APP_ID }}
+      - env:
+          PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+        run: |
+          length=${#PROJECT_AUTOMATION_APP_PEM}
+          echo "length $length"
       - name: Generate token
         id: generate-token
         uses: actions/create-github-app-token@v2
