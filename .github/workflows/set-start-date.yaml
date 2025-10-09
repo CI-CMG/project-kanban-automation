@@ -46,7 +46,7 @@ jobs:
             echo "Project $project_number"
 
             has_next_page=true
-            end_cursor='
+            end_cursor=''
           
             gh api graphql -f query='query($organization: String! $number: Int! $end_cursor: String!) {
               organization(login: $organization) {
