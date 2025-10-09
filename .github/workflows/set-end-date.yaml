@@ -31,7 +31,7 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
           ORGANIZATION: CI-CMG
-          PROJECT_NUMBERS: ${{ github.event.inputs.project-numbers }}
+          PROJECT_NUMBERS: ${{ inputs.project-numbers }}
         run: |
           set -e
           IFS=","

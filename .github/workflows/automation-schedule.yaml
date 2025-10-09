@@ -2,24 +2,11 @@ name: automated schedule
 
 on:
   schedule:
-    - cron: "*/3 * * * *"
-#    - cron: "* * * * *"
+    - cron: "*/10 * * * *"
 
 jobs:
-  parent-issue-to-in-progress:
-    uses: ./.github/workflows/parent-issue-to-in-progress.yaml
-    with:
-      project-numbers: '17,23,24,25,26,27,28,29'
-    secrets:
-      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
-  set-start-date:
-    uses: ./.github/workflows/set-start-date.yaml
-    with:
-      project-numbers: '17,23,24,25,26,27,28,29'
-    secrets:
-      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
-  set-end-date:
-    uses: ./.github/workflows/set-end-date.yaml
+  schedule:
+    uses: ./.github/workflows/run-all.yaml
     with:
       project-numbers: '17,23,24,25,26,27,28,29'
     secrets:
