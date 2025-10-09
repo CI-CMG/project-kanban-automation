@@ -62,7 +62,7 @@ jobs:
                       ... on ProjectV2Field { id name }
                     }
                   }
-                  items(first: 100, after: null) {
+                  items(first: 100, after: $end_cursor) {
                     pageInfo { endCursor startCursor hasNextPage hasPreviousPage }
                     nodes { 
                       ... on ProjectV2Item { id isArchived type
