@@ -33,57 +33,78 @@ jobs:
           ORGANIZATION: CI-CMG
           PROJECT_NUMBERS: ${{ github.event.inputs.project-numbers }}
         run: |
+          
+          set -e
+          
           IFS=","
           read -ra array <<< "$PROJECT_NUMBERS"
              
           for project_number in "${array[@]}"; do
             echo "Project $project_number"
+           
+            has_next_page=true
+            end_cursor=''
+            page=1
+            set +e
+            rm page*.json
+            set -e
+          
+            while [ $has_next_page = true ]; do
+          
+              file=page$page.json
             
-            gh api graphql -f query='query($organization: String! $number: Int!) {
-              organization(login: $organization) {
-                projectV2(number: $number) {
-                  id
-                  fields(first: 100) {
-                    nodes {
-                      ... on ProjectV2SingleSelectField {
-                        id
-                        name
-                        options { id name }
+              gh api graphql -f query='query($organization: String! $number: Int! $end_cursor: String!) {
+                organization(login: $organization) {
+                  projectV2(number: $number) {
+                    id
+                    fields(first: 100) {
+                      nodes {
+                        ... on ProjectV2SingleSelectField {
+                          id
+                          name
+                          options { id name }
+                        }
                       }
                     }
-                  }
-                  items(first: 100, after: null) {
-                    pageInfo { endCursor startCursor hasNextPage hasPreviousPage }
-                    nodes { 
-                      ... on ProjectV2Item { id isArchived type
-                        status: fieldValueByName(name: "Status") {
-                          ... on ProjectV2ItemFieldSingleSelectValue { name }
-                        }
-                        content {
-                          ... on Issue { id state title number 
-                            issueType {
-                              name
+                    items(first: 100, after: $end_cursor) {
+                      pageInfo { endCursor startCursor hasNextPage hasPreviousPage }
+                      nodes { 
+                        ... on ProjectV2Item { id isArchived type
+                          status: fieldValueByName(name: "Status") {
+                            ... on ProjectV2ItemFieldSingleSelectValue { name }
+                          }
+                          content {
+                            ... on Issue { id state title number 
+                              issueType {
+                                name
+                              }
+                              parent { id title number state
+                                issueType { name }
+                              }
+                              repository { id name }
                             }
-                            parent { id title number state
-                              issueType { name }
-                            }
-                            repository { id name }
                           }
                         }
                       }
                     }
                   }
                 }
-              }
-            }' -f organization=$ORGANIZATION -F number=$project_number > project.json
+              }' -f organization=$ORGANIZATION -F number=$project_number -f end_cursor=$end_cursor > $file
+              
+              end_cursor=$(jq -r '.data.organization.projectV2.items.pageInfo.endCursor' $file)
+              has_next_page=$(jq -r '.data.organization.projectV2.items.pageInfo.hasNextPage' $file)
             
-            end_cursor=$(jq -r '.data.organization.projectV2.items.pageInfo.endCursor' project.json)
-            has_next_page=$(jq -r '.data.organization.projectV2.items.pageInfo.hasNextPage' project.json)
-            project_id=$(jq -r '.data.organization.projectV2.id' project.json)
-            status_field_id=$(jq -r '.data.organization.projectV2.fields.nodes[] | select(.name == "Status") | .id' project.json)
-            in_progress_value_id=$(jq -r '.data.organization.projectV2.fields.nodes[] | select(.name == "Status") | .options[] | select(.name == "In progress") | .id' project.json)
+              ((page++))
+          
+            done
+          
+            jq -r '.data.organization.projectV2.items.nodes[] | select(.isArchived == false)' page*.json | jq -s > items.json
+          
+            project_id=$(jq -r '.data.organization.projectV2.id' page1.json)
+            status_field_id=$(jq -r '.data.organization.projectV2.fields.nodes[] | select(.name == "Status") | .id' page1.json)
+            in_progress_value_id=$(jq -r '.data.organization.projectV2.fields.nodes[] | select(.name == "Status") | .options[] | select(.name == "In progress") | .id' page1.json)
             
-            jq -r '.data.organization.projectV2.items.nodes[] | select(.content.parent != null and .isArchived == false and (.status.name == "In review" or .status.name == "In progress" or .status.name == "Blocked") )' project.json | jq -s > with_parents.json
+            jq -r '.[] | select(.content.parent != null and (.status.name == "In review" or .status.name == "In progress" or .status.name == "Blocked") )' items.json | jq -s > with_parents.json
             
             with_parents_count=$(jq -r '. | length' with_parents.json)
             for (( i=0; i<$with_parents_count; i++ ))
@@ -91,8 +112,8 @@ jobs:
               repository=$(jq -r ".[$i].content.repository.name" with_parents.json)
               child=$(jq -r ".[$i].content.number" with_parents.json)
               parent=$(jq -r ".[$i].content.parent.number" with_parents.json)
-              parent_id=$(jq -r ".data.organization.projectV2.items.nodes[] | select(.content.repository.name == \"$repository\" and .content.number == $parent) | .id" project.json)
-              parent_status=$(jq -r ".data.organization.projectV2.items.nodes[] | select(.content.repository.name == \"$repository\" and .content.number == $parent) | .status.name" project.json)
+              parent_id=$(jq -r ".[] | select(.content.repository.name == \"$repository\" and .content.number == $parent) | .id" items.json)
+              parent_status=$(jq -r ".[] | select(.content.repository.name == \"$repository\" and .content.number == $parent) | .status.name" items.json)
               if [[ "$parent_status" =~ ^(Backlog|Ready|Done)$ ]]; then
                 echo "update issue $repository/$parent with status $parent_status"
                 gh api graphql -f query='mutation($project: ID! $item: ID! $status_field: ID! $status_value: String!) {
