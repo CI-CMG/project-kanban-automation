@@ -20,12 +20,6 @@ jobs:
   graphql:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ vars.PROJECT_AUTOMATION_APP_ID }}
-      - env:
-          PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
-        run: |
-          length=${#PROJECT_AUTOMATION_APP_PEM}
-          echo "length $length"
       - name: Generate token
         id: generate-token
         uses: actions/create-github-app-token@v2
@@ -48,61 +42,72 @@ jobs:
 
             has_next_page=true
             end_cursor=''
+            page=1
+            set +e
+            rm page*.json
+            set -e
+  
+            while [ $has_next_page = true ]; do
+  
+              file=page$page.json
           
-            gh api graphql -f query='query($organization: String! $number: Int! $end_cursor: String!) {
-              organization(login: $organization) {
-                projectV2(number: $number) {
-                  id
-                  fields(first: 100) {
-                    nodes {
-                      ... on ProjectV2SingleSelectField {
-                        id
-                        name
-                        options { id name }
+              gh api graphql -f query='query($organization: String! $number: Int! $end_cursor: String!) {
+                organization(login: $organization) {
+                  projectV2(number: $number) {
+                    id
+                    fields(first: 100) {
+                      nodes {
+                        ... on ProjectV2SingleSelectField {
+                          id
+                          name
+                          options { id name }
+                        }
+                        ... on ProjectV2Field { id name }
                       }
-                      ... on ProjectV2Field { id name }
                     }
-                  }
-                  items(first: 100, after: $end_cursor) {
-                    pageInfo { endCursor startCursor hasNextPage hasPreviousPage }
-                    nodes { 
-                      ... on ProjectV2Item { id isArchived type
-                        status: fieldValueByName(name: "Status") {
-                          ... on ProjectV2ItemFieldSingleSelectValue { name }
-                        }
-                        startDate: fieldValueByName(name: "Start date") {
-                               ... on ProjectV2ItemFieldDateValue { date }
-                        }
-                        content {
-                          ... on Issue { id state title number 
-                            issueType {
-                              name
+                    items(first: 1, after: $end_cursor) {
+                      pageInfo { endCursor startCursor hasNextPage hasPreviousPage }
+                      nodes { 
+                        ... on ProjectV2Item { id isArchived type
+                          status: fieldValueByName(name: "Status") {
+                            ... on ProjectV2ItemFieldSingleSelectValue { name }
+                          }
+                          startDate: fieldValueByName(name: "Start date") {
+                                 ... on ProjectV2ItemFieldDateValue { date }
+                          }
+                          content {
+                            ... on Issue { id state title number 
+                              issueType {
+                                name
+                              }
+                              parent { id title number state
+                                issueType { name }
+                              }
+                              repository { id name }
                             }
-                            parent { id title number state
-                              issueType { name }
-                            }
-                            repository { id name }
                           }
                         }
                       }
                     }
                   }
                 }
-              }
-            }' -f organization=$ORGANIZATION -F number=$project_number -f end_cursor=$end_cursor > project.json
+              }' -f organization=$ORGANIZATION -F number=$project_number -f end_cursor=$end_cursor > $file
+              
+              end_cursor=$(jq -r '.data.organization.projectV2.items.pageInfo.endCursor' $file)
+              has_next_page=$(jq -r '.data.organization.projectV2.items.pageInfo.hasNextPage' $file)
+          
+              ((page++))
             
-            end_cursor=$(jq -r '.data.organization.projectV2.items.pageInfo.endCursor' project.json)
-            has_next_page=$(jq -r '.data.organization.projectV2.items.pageInfo.hasNextPage' project.json)
-            project_id=$(jq -r '.data.organization.projectV2.id' project.json)
-            field_id=$(jq -r '.data.organization.projectV2.fields.nodes[] | select(.name == "Start date") | .id' project.json)
+            done
+          
+            jq -r '.data.organization.projectV2.items.nodes[] | select(.isArchived == false)' page*.json | jq -s > items.json
+          
+            project_id=$(jq -r '.data.organization.projectV2.id' page1.json)
+            field_id=$(jq -r '.data.organization.projectV2.fields.nodes[] | select(.name == "Start date") | .id' page1.json)
             start_date=$(date +"%Y-%m-%d")
-
-            cat project.json
             
-            jq -r '.data.organization.projectV2.items.nodes[] | select(.startDate == null and .isArchived == false and (.status.name == "In review" or .status.name == "In progress" or .status.name == "Blocked" or .status.name == "Done") )' project.json | jq -s > no_start.json
+            jq -r '.[] | select(.startDate == null and (.status.name == "In review" or .status.name == "In progress" or .status.name == "Blocked" or .status.name == "Done") )' items.json | jq -s > no_start.json
 
-            cat no_start.json
-            
             no_start_count=$(jq -r '. | length' no_start.json)
             for (( i=0; i<$no_start_count; i++ ))
             do
