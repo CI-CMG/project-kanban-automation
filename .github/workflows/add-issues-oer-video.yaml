@@ -1,0 +1,47 @@
+name: add OER Video issues to project
+
+on:
+  workflow_call:
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM:
+        required: true
+  workflow_dispatch:
+
+
+jobs:
+  fishflicks-cli:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 25
+      repository: fishflicks-cli
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  fishflicks-web:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 25
+      repository: fishflicks-web
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  fishflicks-jpa:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 25
+      repository: ffishflicks-jpa
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  fishflicks-jpa-original:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 25
+      repository: fishflicks-jpa-original
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  fishflicks-iso:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 25
+      repository: fishflicks-iso
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+
