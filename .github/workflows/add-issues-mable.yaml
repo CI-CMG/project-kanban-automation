@@ -1,0 +1,89 @@
+name: add Mable issues to project
+
+on:
+  workflow_call:
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM:
+        required: true
+  workflow_dispatch:
+
+
+jobs:
+  mable:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 29
+      repository: mable
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  mb-system-service:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 29
+      repository: mable
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  mable-bdp-push-service:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 29
+      repository: mable
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  mable-service-sdk:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 29
+      repository: mable
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  cruise-jpa:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 29
+      repository: mable
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  mgg-cruise:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 29
+      repository: mable
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  mb-backfill:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 29
+      repository: mable
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  cruise-schema-orm-py:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 29
+      repository: mable
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  mb-cruise-migration:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 29
+      repository: mable
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  mb-archive-web-search:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 29
+      repository: mable
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  mb-courier:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 29
+      repository: mable
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+
