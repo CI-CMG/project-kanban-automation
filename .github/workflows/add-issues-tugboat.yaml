@@ -1,4 +1,4 @@
-name: add Gazetteer issues to project
+name: add Tugboat issues to project
 
 on:
   workflow_call:
@@ -9,24 +9,24 @@ on:
 
 
 jobs:
-  gazetteer:
+  tugboat:
     uses: ./.github/workflows/add-issues-to-project.yaml
     with:
-      project-number: 23
-      repository: gazetteer
+      project-number: 27
+      repository: tugboat
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
-  gazetteer-jpa-entity:
+  mgg-core:
     uses: ./.github/workflows/add-issues-to-project.yaml
     with:
-      project-number: 23
-      repository: gazetteer-jpa-entity
+      project-number: 27
+      repository: mgg-core
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
-  gazetteer-cli:
+  mgg-core-bom:
     uses: ./.github/workflows/add-issues-to-project.yaml
     with:
-      project-number: 23
-      repository: gazetteer-cli
+      project-number: 27
+      repository: mgg-core-bom
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}

@@ -25,3 +25,7 @@ jobs:
     uses: ./.github/workflows/add-issues-oer-video.yaml
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  add-issues-oer-tugboat:
+    uses: ./.github/workflows/add-issues-tugboat.yaml
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
