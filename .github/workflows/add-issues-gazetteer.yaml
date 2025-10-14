@@ -1,4 +1,4 @@
-name: add gazetteer issues to project
+name: add Gazetteer issues to project
 
 on:
   workflow_call:

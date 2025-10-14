@@ -1,0 +1,47 @@
+name: add Crowbar issues to project
+
+on:
+  workflow_call:
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM:
+        required: true
+  workflow_dispatch:
+
+
+jobs:
+  crowbar-uscg-xyz:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: crowbar-uscg-xyz
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  crowbar-lite:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: crowbar-lite
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  crowbar-cli:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: crowbar-cli
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  csb-nodd-conveyor:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: crowbar-cli
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  csb-validator:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: crowbar-cli
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+
