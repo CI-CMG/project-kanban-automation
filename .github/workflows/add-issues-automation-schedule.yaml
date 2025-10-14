@@ -13,3 +13,7 @@ jobs:
     uses: ./.github/workflows/add-issues-trackline.yaml
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  add-issues-gazetteer:
+    uses: ./.github/workflows/add-issues-gazetteer.yaml
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}

@@ -1,0 +1,32 @@
+name: add gazetteer issues to project
+
+on:
+  workflow_call:
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM:
+        required: true
+  workflow_dispatch:
+
+
+jobs:
+  trackline-ingest:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 23
+      repository: gazetteer
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  gazetteer-jpa-entity:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 23
+      repository: gazetteer-jpa-entity
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  gazetteer-cli:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 23
+      repository: gazetteer-cli
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
