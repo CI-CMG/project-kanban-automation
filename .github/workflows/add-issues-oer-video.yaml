@@ -27,7 +27,7 @@ jobs:
     uses: ./.github/workflows/add-issues-to-project.yaml
     with:
       project-number: 25
-      repository: ffishflicks-jpa
+      repository: fishflicks-jpa
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
   fishflicks-jpa-original:
