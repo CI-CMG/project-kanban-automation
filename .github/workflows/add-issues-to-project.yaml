@@ -62,7 +62,7 @@ jobs:
                 repository(name: $repository) {
                   id
                   name
-                  issues(first: 1, states: [OPEN], after: $end_cursor) {
+                  issues(first: 100, states: [OPEN], after: $end_cursor) {
                     pageInfo { endCursor hasNextPage }
                     nodes {
                       id
@@ -97,9 +97,9 @@ jobs:
             do
               issue_id=$(jq -r ".[$i].id" issues_not_in_project.json)
               echo "setting issue $issue_id on project $project_id"
-              #gh api graphql -f query='mutation($project_id: ID! $item_id: ID! $field_id: ID! $end_date: Date!) {
-              #  set_end_date: updateProjectV2ItemFieldValue(input: {  projectId: $project_id  itemId: $item_id fieldId: $field_id  value: { date: $end_date } }) {
-              #    projectV2Item { id }
-              #  }
-              #}' -f project_id=$project_id -f item_id=$item_id -f field_id=$field_id -f end_date=$end_date
+              gh api graphql -f query='mutation($project_id: ID! $item_id: ID! $issue_id: ID!) {
+                addProjectV2ItemById(input: {projectId: $project_id, contentId: $issue_id}) {
+                  item { id }
+                }
+              }' -f project_id=$project_id -f issue_id=$issue_id
           done
