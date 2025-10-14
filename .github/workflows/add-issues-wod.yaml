@@ -1,0 +1,59 @@
+name: add WOD issues to project
+
+on:
+  workflow_call:
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM:
+        required: true
+  workflow_dispatch:
+
+jobs:
+  argonaut:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 17
+      repository: argonaut
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  argonaut-nccf-helper:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 17
+      repository: argonaut-nccf-helper
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  wod-iquod-qc-spark:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 17
+      repository: wod-iquod-qc-spark
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  wod-ascii-to-parquet-spark:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 17
+      repository: wod-ascii-to-parquet-spark
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  wod-ascii-parquet-transformer:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 17
+      repository: wod-ascii-parquet-transformer
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  wod-parquet-model:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 17
+      repository: wod-parquet-model
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  wod-ascii-model:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 17
+      repository: wod-ascii-model
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}

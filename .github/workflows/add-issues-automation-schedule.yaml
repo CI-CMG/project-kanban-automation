@@ -1,0 +1,11 @@
+name: add issues to projects automated schedule
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+
+jobs:
+  add-issues-wod:
+    uses: ./.github/workflows/add-issues-wod.yaml
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}

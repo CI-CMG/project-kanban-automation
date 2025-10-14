@@ -8,6 +8,6 @@ jobs:
   schedule:
     uses: ./.github/workflows/run-all.yaml
     with:
-      project-numbers: '17,23,24,25,26,27,28,29'
+      project-numbers: '17,23,24,25,26,27,28,29,31'
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
