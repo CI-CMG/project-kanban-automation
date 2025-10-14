@@ -1,0 +1,62 @@
+name: add EchoFish issues to project
+
+on:
+  workflow_call:
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM:
+        required: true
+  workflow_dispatch:
+
+
+jobs:
+  water-column-sonar-resampling:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 32
+      repository: water-column-sonar-resampling
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  water-column-sonar-api:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 32
+      repository: water-column-sonar-api
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  water-column-sonar-processing:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 32
+      repository: water-column-sonar-processing
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  water-column-sonar-knowledge-graph:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 32
+      repository: water-column-sonar-knowledge-graph
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  water-column-sonar-ui:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 32
+      repository: water-column-sonar-ui
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  water-column-sonar-ospool:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 32
+      repository: water-column-sonar-ospool
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  water-column-sonar-annotation:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 32
+      repository: water-column-sonar-annotation
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+
+

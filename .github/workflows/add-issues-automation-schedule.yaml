@@ -37,3 +37,7 @@ jobs:
     uses: ./.github/workflows/add-issues-oasis.yaml
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  add-issues-echofish:
+    uses: ./.github/workflows/add-issues-echofish.yaml
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
