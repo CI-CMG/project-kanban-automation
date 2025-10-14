@@ -97,7 +97,7 @@ jobs:
             do
               issue_id=$(jq -r ".[$i].id" issues_not_in_project.json)
               echo "setting issue $issue_id on project $project_id"
-              gh api graphql -f query='mutation($project_id: ID! $item_id: ID! $issue_id: ID!) {
+              gh api graphql -f query='mutation($project_id: ID! $issue_id: ID!) {
                 addProjectV2ItemById(input: {projectId: $project_id, contentId: $issue_id}) {
                   item { id }
                 }
