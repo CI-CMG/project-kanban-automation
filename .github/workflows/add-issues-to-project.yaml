@@ -1,0 +1,85 @@
+name: add issues to project
+
+on:
+  workflow_call:
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM:
+        required: true
+    inputs:
+      repository:
+        description: 'Repository'
+        required: true
+        type: string
+      project-number:
+        description: 'Project Number'
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: 'Repository'
+        required: true
+        type: string
+      project-number:
+        description: 'Project Number'
+        required: true
+        type: string
+jobs:
+  graphql:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate token
+        id: generate-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.PROJECT_AUTOMATION_APP_ID }}
+          private-key: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+          owner: ${{ github.repository_owner }}
+      - name: Get project data
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+          ORGANIZATION: CI-CMG
+          PROJECT_NUMBER: ${{ inputs.project-number }}
+          REPOSITORY: ${{ inputs.repository }}
+        run: |
+          set -e
+          echo "Project $PROJECT_NUMBER"
+          echo "Repository $REPOSITORY"
+        
+          has_next_page=true
+          end_cursor=''
+          page=1
+          set +e
+          rm page*.json
+          set -e
+          #while [ $has_next_page = true ]; do
+        
+            file=page$page.json
+        
+            gh api graphql -f query='query($organization: String! $number: Int! $end_cursor: String!) {
+              organization(login: "CI-CMG") {
+                projectV2(number: $number) { id }
+                repository(name: "gazetteer") {
+                  issues(first: 100, after: $end_cursor) {
+                    pageInfo { endCursor hasNextPage }
+                    nodes {
+                      id
+                      closed
+                      projectItems(includeArchived: false, first: 100) {
+                        nodes {
+                          project { id number }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }' -f organization=$ORGANIZATION -F number=$project_number -f end_cursor=$end_cursor > $file
+          
+            end_cursor=$(jq -r '.data.organization.projectV2.items.pageInfo.endCursor' $file)
+            has_next_page=$(jq -r '.data.organization.projectV2.items.pageInfo.hasNextPage' $file)
+            
+            ((page++))
+            
+          #done
+          cat $file
