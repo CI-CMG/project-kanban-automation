@@ -52,7 +52,7 @@ jobs:
           set +e
           rm page*.json
           set -e
-          #while [ $has_next_page = true ]; do
+          while [ $has_next_page = true ]; do
         
             file=page$page.json
         
@@ -62,7 +62,7 @@ jobs:
                 repository(name: $repository) {
                   id
                   name
-                  issues(first: 100, states: [OPEN], after: $end_cursor) {
+                  issues(first: 1, states: [OPEN], after: $end_cursor) {
                     pageInfo { endCursor hasNextPage }
                     nodes {
                       id
@@ -79,10 +79,27 @@ jobs:
               }
             }' -f organization=$ORGANIZATION -f repository=$REPOSITORY -F number=$PROJECT_NUMBER -f end_cursor=$end_cursor > $file
           
-            end_cursor=$(jq -r '.data.organization.projectV2.items.pageInfo.endCursor' $file)
-            has_next_page=$(jq -r '.data.organization.projectV2.items.pageInfo.hasNextPage' $file)
+            end_cursor=$(jq -r '.data.organization.repository.issues.pageInfo.endCursor' $file)
+            has_next_page=$(jq -r '.data.organization.repository.issues.pageInfo.hasNextPage' $file)
             
             ((page++))
             
-          #done
-          cat $file
+          done
+          
+          jq -r '.data.organization.repository.issues.nodes[] | select(contains({projectItems:{nodes:[{project:{id:17}}]}}) | not)' page*.json | jq -s > issues_not_in_project.json
+          
+          project_id=$(jq -r '.data.organization.projectV2.id' page1.json)
+          
+          cat issues_not_in_project.json
+          
+          count=$(jq -r '. | length' issues_not_in_project.json)
+          for (( i=0; i<$count; i++ ))
+            do
+              issue_id=$(jq -r ".[$i].id" issues_not_in_project.json)
+              echo "setting issue $issue_id on project $project_id"
+              #gh api graphql -f query='mutation($project_id: ID! $item_id: ID! $field_id: ID! $end_date: Date!) {
+              #  set_end_date: updateProjectV2ItemFieldValue(input: {  projectId: $project_id  itemId: $item_id fieldId: $field_id  value: { date: $end_date } }) {
+              #    projectV2Item { id }
+              #  }
+              #}' -f project_id=$project_id -f item_id=$item_id -f field_id=$field_id -f end_date=$end_date
+          done
