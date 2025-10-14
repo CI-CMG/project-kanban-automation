@@ -57,7 +57,7 @@ jobs:
             file=page$page.json
         
             gh api graphql -f query='query($organization: String! $number: Int! $end_cursor: String!) {
-              organization(login: "CI-CMG") {
+              organization(login: $organization) {
                 projectV2(number: $number) { id }
                 repository(name: "gazetteer") {
                   issues(first: 100, after: $end_cursor) {
