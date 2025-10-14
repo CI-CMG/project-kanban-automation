@@ -56,14 +56,17 @@ jobs:
         
             file=page$page.json
         
-            gh api graphql -f query='query($organization: String! $number: Int! $end_cursor: String!) {
+            gh api graphql -f query='query($organization: String! $repository: String! $number: Int! $end_cursor: String!) {
               organization(login: $organization) {
                 projectV2(number: $number) { id }
-                repository(name: "gazetteer") {
-                  issues(first: 100, after: $end_cursor) {
+                repository(name: $repository) {
+                  id
+                  name
+                  issues(first: 100, states: [OPEN], after: $end_cursor) {
                     pageInfo { endCursor hasNextPage }
                     nodes {
                       id
+                      title
                       closed
                       projectItems(includeArchived: false, first: 100) {
                         nodes {
@@ -74,7 +77,7 @@ jobs:
                   }
                 }
               }
-            }' -f organization=$ORGANIZATION -F number=$PROJECT_NUMBER -f end_cursor=$end_cursor > $file
+            }' -f organization=$ORGANIZATION -f repository=$REPOSITORY -F number=$PROJECT_NUMBER -f end_cursor=$end_cursor > $file
           
             end_cursor=$(jq -r '.data.organization.projectV2.items.pageInfo.endCursor' $file)
             has_next_page=$(jq -r '.data.organization.projectV2.items.pageInfo.hasNextPage' $file)
