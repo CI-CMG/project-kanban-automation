@@ -1,0 +1,258 @@
+name: add open source / utility issues to project
+
+on:
+  workflow_call:
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM:
+        required: true
+  workflow_dispatch:
+
+
+jobs:
+  cires-cmg-dev-tools:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: cires-cmg-dev-tools
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  mgg-jpa-entity-utils:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: mgg-jpa-entity-utils
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  cires-cmg-dev-wiki:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: cires-cmg-dev-wiki
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  s3-repository-cleaner:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: s3-repository-cleaner
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  aws-cli:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: aws-cli
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  pycamel:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: pycamel
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  iso19139-metadata-jaxb:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: iso19139-metadata-jaxb
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  trackline-simplifier:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: trackline-simplifier
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  cas-overlay-template:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: cas-overlay-template
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  geosamples-api:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: geosamples-api
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  form-vuex:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: form-vuex
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  imlgs:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: imlgs
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  cas-secret-generator:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: cas-secret-generator
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  cmg-topojson:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: cmg-topojson
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  geosamples-ingest:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: geosamples-ingest
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  mapbox-vector-tile:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: mapbox-vector-tile
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  devops-challenge-bathymetry:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: devops-challenge-bathymetry
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  project-documentation:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: project-documentation
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  aws-zarr:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: aws-zarr
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  aws-s3-outputstream:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: aws-s3-outputstream
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  io-stream-utils:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: io-stream-utils
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  aws-s3-cloudformation-utils:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: aws-s3-cloudformation-utils
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  shell-executor:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: shell-executor
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  h3-hull-generator:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: h3-hull-generator
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  h3-darwin-arm64:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: h3-darwin-arm64
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  polar-processor:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: polar-processor
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  health-check:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: health-check
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  maven-dependency-build:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: maven-dependency-build
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  release-notifier:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: release-notifier
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  mvt-set-generator:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: mvt-set-generator
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  project-kanban-automation:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: project-kanban-automation
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  ci-mgg-teos-gsw-java:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: ci-mgg-teos-gsw-java
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  blosc-native-linux-x86-64:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: blosc-native-linux-x86-64
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  blosc-native-darwin-aarch64:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: blosc-native-darwin-aarch64
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  geosamples-ingest-jpa:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 24
+      repository: geosamples-ingest-jpa
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+
+
