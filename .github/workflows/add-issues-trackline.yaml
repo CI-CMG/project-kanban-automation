@@ -23,3 +23,38 @@ jobs:
       repository: tharp
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  trackline-aws-parameters:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 31
+      repository: trackline-aws-parameters
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  trackline-aws-consumer:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 31
+      repository: trackline-aws-consumer
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  trackline-jpa:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 31
+      repository: trackline-jpa
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  trackline-next-engine:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 31
+      repository: trackline-next-engine
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  tharp-aws-parameters:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 31
+      repository: tharp-aws-parameters
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
