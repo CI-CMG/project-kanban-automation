@@ -107,4 +107,25 @@ jobs:
       repository: cruise-pack-jaxb
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  tugboat:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 34
+      repository: tugboat
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  mgg-core:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 34
+      repository: mgg-core
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  mgg-core-bom:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 34
+      repository: mgg-core-bom
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
 
