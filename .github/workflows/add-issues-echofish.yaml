@@ -58,5 +58,12 @@ jobs:
       repository: water-column-sonar-annotation
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  water-column-sonar-ai:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 32
+      repository: water-column-sonar-ai
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
 
 
