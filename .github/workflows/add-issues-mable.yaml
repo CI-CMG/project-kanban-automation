@@ -20,70 +20,77 @@ jobs:
     uses: ./.github/workflows/add-issues-to-project.yaml
     with:
       project-number: 29
-      repository: mable
+      repository: mb-system-service
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
   mable-bdp-push-service:
     uses: ./.github/workflows/add-issues-to-project.yaml
     with:
       project-number: 29
-      repository: mable
+      repository: mable-bdp-push-service
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
   mable-service-sdk:
     uses: ./.github/workflows/add-issues-to-project.yaml
     with:
       project-number: 29
-      repository: mable
+      repository: mable-service-sdk
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
   cruise-jpa:
     uses: ./.github/workflows/add-issues-to-project.yaml
     with:
       project-number: 29
-      repository: mable
+      repository: cruise-jpa
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
   mgg-cruise:
     uses: ./.github/workflows/add-issues-to-project.yaml
     with:
       project-number: 29
-      repository: mable
+      repository: mgg-cruise
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
   mb-backfill:
     uses: ./.github/workflows/add-issues-to-project.yaml
     with:
       project-number: 29
-      repository: mable
+      repository: mb-backfill
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
   cruise-schema-orm-py:
     uses: ./.github/workflows/add-issues-to-project.yaml
     with:
       project-number: 29
-      repository: mable
+      repository: cruise-schema-orm-py
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
   mb-cruise-migration:
     uses: ./.github/workflows/add-issues-to-project.yaml
     with:
       project-number: 29
-      repository: mable
+      repository: mb-cruise-migration
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
   mb-archive-web-search:
     uses: ./.github/workflows/add-issues-to-project.yaml
     with:
       project-number: 29
-      repository: mable
+      repository: mb-archive-web-search
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
   mb-courier:
     uses: ./.github/workflows/add-issues-to-project.yaml
     with:
       project-number: 29
-      repository: mable
+      repository: mb-courier
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  aws-multibeam-cli:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 29
+      repository: aws-multibeam-cli
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
 
