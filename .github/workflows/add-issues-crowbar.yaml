@@ -34,14 +34,119 @@ jobs:
     uses: ./.github/workflows/add-issues-to-project.yaml
     with:
       project-number: 28
-      repository: crowbar-cli
+      repository: csb-nodd-conveyor
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
   csb-validator:
     uses: ./.github/workflows/add-issues-to-project.yaml
     with:
       project-number: 28
-      repository: crowbar-cli
+      repository: csb-validator
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  csb-client:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: csb-client
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  csb-serverless:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: csb-serverless
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  csbCrawler2Cloud:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: csbCrawler2Cloud
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  csb-ec2-support:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: csb-ec2-support
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  pointstore-dashboard:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: pointstore-dashboard
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  csb-providers-dashboard:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: csb-providers-dashboard
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  csb-roles:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: csb-roles
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  csb-layers:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: csb-layers
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  csb-maintenance:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: csb-maintenance
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  csb-ingest:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: csb-ingest
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  aws-cf-custom-resource-bucket-drain:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: aws-cf-custom-resource-bucket-drain
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  pointstore-api-docs:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: pointstore-api-docs
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  csb-data-processing:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: csb-data-processing
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  csb-pointstore-dashboard:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: csb-pointstore-dashboard
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  bathy-app:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 28
+      repository: bathy-app
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
 
