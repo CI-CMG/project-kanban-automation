@@ -1,0 +1,39 @@
+name: add hazards issues to project
+
+on:
+  workflow_call:
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM:
+        required: true
+  workflow_dispatch:
+
+
+jobs:
+  hazard-images:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 33
+      repository: hazard-images
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  hazard-jpa-entity:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 33
+      repository: hazard-jpa-entity
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  hazel:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 33
+      repository: hazel
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  quake-net:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 33
+      repository: quake-net
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
