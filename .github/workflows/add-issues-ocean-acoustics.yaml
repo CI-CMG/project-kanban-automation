@@ -1,0 +1,110 @@
+name: add ocean acoustics issues to project
+
+on:
+  workflow_call:
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM:
+        required: true
+  workflow_dispatch:
+
+
+jobs:
+  CruisePack:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 34
+      repository: CruisePack
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  CPI:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 34
+      repository: CPI
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  wcsd-decompression-cf:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 34
+      repository: wcsd-decompression-cf
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  wcsd-local-metadata:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 34
+      repository: wcsd-local-metadata
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  pyEchometrics:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 34
+      repository: pyEchometrics
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  PAD_ERDDAP:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 34
+      repository: PAD_ERDDAP
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  pad-products:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 34
+      repository: pad-products
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  cruisepack-reorg:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 34
+      repository: cruisepack-reorg
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  pad-jpa:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 34
+      repository: pad-jpa
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  pace-templates:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 34
+      repository: pace-templates
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  pace:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 34
+      repository: pace
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  cruise-pack-data:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 34
+      repository: cruise-pack-data
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  JCruisePack:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 34
+      repository: JCruisePack
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  cruise-pack-jaxb:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 34
+      repository: cruise-pack-jaxb
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+
