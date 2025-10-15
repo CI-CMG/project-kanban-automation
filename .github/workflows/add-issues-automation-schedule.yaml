@@ -5,28 +5,20 @@ on:
     - cron: "*/30 * * * *"
 
 jobs:
-  add-issues-wod:
-    uses: ./.github/workflows/add-issues-wod.yaml
+  add-issues-crowbar:
+    uses: ./.github/workflows/add-issues-crowbar.yaml
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
-  add-issues-trackline:
-    uses: ./.github/workflows/add-issues-trackline.yaml
+  add-issues-echofish:
+    uses: ./.github/workflows/add-issues-echofish.yaml
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
   add-issues-gazetteer:
     uses: ./.github/workflows/add-issues-gazetteer.yaml
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
-  add-issues-crowbar:
-    uses: ./.github/workflows/add-issues-crowbar.yaml
-    secrets:
-      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
-  add-issues-oer-video:
-    uses: ./.github/workflows/add-issues-oer-video.yaml
-    secrets:
-      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
-  add-issues-tugboat:
-    uses: ./.github/workflows/add-issues-tugboat.yaml
+  add-issues-hazards:
+    uses: ./.github/workflows/add-issues-hazards.yaml
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
   add-issues-mable:
@@ -37,7 +29,27 @@ jobs:
     uses: ./.github/workflows/add-issues-oasis.yaml
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
-  add-issues-echofish:
-    uses: ./.github/workflows/add-issues-echofish.yaml
+  add-issues-ocean-acoustics:
+    uses: ./.github/workflows/add-issues-ocean-acoustics.yaml
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  add-issues-oer-video:
+    uses: ./.github/workflows/add-issues-oer-video.yaml
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  add-issues-open-source-util:
+    uses: ./.github/workflows/add-issues-open-source-util.yaml
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  add-issues-trackline:
+    uses: ./.github/workflows/add-issues-trackline.yaml
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  add-issues-tugboat:
+    uses: ./.github/workflows/add-issues-tugboat.yaml
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  add-issues-wod:
+    uses: ./.github/workflows/add-issues-wod.yaml
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}

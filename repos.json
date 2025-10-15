@@ -1,0 +1,194 @@
+[
+  {
+    "name": "DEM-Metadata"
+  },
+  {
+    "name": "WCSD_Packager"
+  },
+  {
+    "name": "PassivePacker"
+  },
+  {
+    "name": "notebooks"
+  },
+  {
+    "name": "mudrod"
+  },
+  {
+    "name": "packer-rhel7-vms"
+  },
+  {
+    "name": "map-viewers"
+  },
+  {
+    "name": "dijits"
+  },
+  {
+    "name": "gis-tools"
+  },
+  {
+    "name": "marigram-toolkit"
+  },
+  {
+    "name": "geocrawler"
+  },
+  {
+    "name": "reporting"
+  },
+  {
+    "name": "monitoring"
+  },
+  {
+    "name": "ecs-metadata"
+  },
+  {
+    "name": "tg-toolkit"
+  },
+  {
+    "name": "dart-toolkit"
+  },
+  {
+    "name": "WCSD-Ingest-Legacy"
+  },
+  {
+    "name": "big_orders"
+  },
+  {
+    "name": "archive-toolkit"
+  },
+  {
+    "name": "archive-web-search"
+  },
+  {
+    "name": "iho_dcdb"
+  },
+  {
+    "name": "trackline-viewer"
+  },
+  {
+    "name": "exb-widgets"
+  },
+  {
+    "name": "exb-applications"
+  },
+  {
+    "name": "edmw-logging-workshop"
+  },
+  {
+    "name": "citations-web-search"
+  },
+  {
+    "name": "aws-autogrid"
+  },
+  {
+    "name": "world-ocean-database-legacy"
+  },
+  {
+    "name": "github-cognito-openid-wrapper"
+  },
+  {
+    "name": "geolin"
+  },
+  {
+    "name": "uscg-split-survey"
+  },
+  {
+    "name": "wod-db-ui"
+  },
+  {
+    "name": "auto-qc-support"
+  },
+  {
+    "name": "wod-auto-qc-4j"
+  },
+  {
+    "name": "AutoQC"
+  },
+  {
+    "name": "auto-qc-pipeline"
+  },
+  {
+    "name": "eipiphany"
+  },
+  {
+    "name": "deep-sea-corals-exb"
+  },
+  {
+    "name": "wodpy"
+  },
+  {
+    "name": "SoundscapeScenes"
+  },
+  {
+    "name": "oceansdb"
+  },
+  {
+    "name": "CoTeDe"
+  },
+  {
+    "name": "CIRES-STP-dpmf-gui"
+  },
+  {
+    "name": "gebco-eip"
+  },
+  {
+    "name": "wod"
+  },
+  {
+    "name": "sftp-ingest"
+  },
+  {
+    "name": "error-handler"
+  },
+  {
+    "name": "geometry-tools"
+  },
+  {
+    "name": "Sheet-PassivePacker"
+  },
+  {
+    "name": "archive-query-service"
+  },
+  {
+    "name": "example-khoa-ows"
+  },
+  {
+    "name": "sandcamel"
+  },
+  {
+    "name": "ocean-acoustics-lab-manual"
+  },
+  {
+    "name": "R2R_puller"
+  },
+  {
+    "name": "OceanAcoustics-LabManual"
+  },
+  {
+    "name": "programming-challenge-trackline-rk"
+  },
+  {
+    "name": "wiki"
+  },
+  {
+    "name": "gitintake"
+  },
+  {
+    "name": "SoundCoop-Paper"
+  },
+  {
+    "name": "back-up-manta-conversion-project"
+  },
+  {
+    "name": "manta-conversion-project"
+  },
+  {
+    "name": "Ocean_Acoustics_Tableau"
+  },
+  {
+    "name": "SoundscapesWebsite"
+  },
+  {
+    "name": "dsc-utils"
+  }
+]
