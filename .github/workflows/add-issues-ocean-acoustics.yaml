@@ -128,4 +128,13 @@ jobs:
       repository: mgg-core-bom
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  cruise-pack-metadata-schema:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 34
+      repository: cruise-pack-metadata-schema
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+
+
 
