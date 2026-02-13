@@ -37,3 +37,10 @@ jobs:
       repository: quake-net
     secrets:
       PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
+  hazards-project-management:
+    uses: ./.github/workflows/add-issues-to-project.yaml
+    with:
+      project-number: 33
+      repository: hazards-project-management
+    secrets:
+      PROJECT_AUTOMATION_APP_PEM: ${{ secrets.PROJECT_AUTOMATION_APP_PEM }}
